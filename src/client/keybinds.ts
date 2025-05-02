@@ -1,5 +1,5 @@
 import type { InventoryItem } from '@common/item';
-import { triggerServerCallback } from '@overextended/ox_lib/client';
+import { triggerServerCallback } from '@communityox/ox_lib/client';
 import { CloseInventory, RequestOpenInventory } from './inventory';
 import { UseItem } from './item';
 import { currentWeapon } from './weapon';

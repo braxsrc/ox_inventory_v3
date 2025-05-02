@@ -2,8 +2,8 @@ import Config from '@common/config';
 import type { ItemProperties, Weapon } from '@common/item';
 import { ClearObject } from '@common/utils';
 import { GetWeaponAttachment } from '@common/weapon';
-import { cache, sleep, waitFor } from '@overextended/ox_lib';
-import { notify } from '@overextended/ox_lib/client';
+import { cache, sleep, waitFor } from '@communityox/ox_lib';
+import { notify } from '@communityox/ox_lib/client';
 
 const SuppressPickupRewardType = N_0xf92099527db8e2a7;
 const ClearPickupRewardTypeSuppression = N_0x762db2d380b48d04;

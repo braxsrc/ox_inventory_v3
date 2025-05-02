@@ -1,6 +1,6 @@
 import Config from '@common/config';
 import { GetInventoryItem } from '@common/item';
-import { triggerClientCallback } from '@overextended/ox_lib/server';
+import { triggerClientCallback } from '@communityox/ox_lib/server';
 import vehicleClasses from '@static/vehicleClasses.json';
 import { GetPlayerInventoryId, GetVehicleFromInventoryId } from '../bridge';
 import { Inventory } from './class';

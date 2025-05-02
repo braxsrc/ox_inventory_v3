@@ -3,7 +3,7 @@ import './item';
 import './weapon';
 import Config from '@common/config';
 import { GROUP_FIREEXTINGUISHER, GROUP_PETROLCAN } from '@common/hash';
-import { cache, onServerCallback } from '@overextended/ox_lib/client';
+import { cache, onServerCallback } from '@communityox/ox_lib/client';
 import { InventoryState, inventoryState } from './inventory';
 import { isUsingItem } from './item';
 import { currentWeapon, weaponWheelEnabled } from './weapon';

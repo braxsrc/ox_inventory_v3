@@ -1,5 +1,5 @@
 import { GetInventoryItem, GetItemData, type ItemProperties, type Weapon } from '@common/item';
-import { onClientCallback } from '@overextended/ox_lib/server';
+import { onClientCallback } from '@communityox/ox_lib/server';
 import { GetInventory } from './inventory';
 import { Inventory } from './inventory/class';
 import './commands';

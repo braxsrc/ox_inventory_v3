@@ -1,6 +1,6 @@
 import type { BaseInventory } from '@common/inventory/class';
 import type { InventoryItem } from '@common/item/index';
-import { cache, requestAnimDict, sleep, triggerServerCallback, waitFor } from '@overextended/ox_lib/client';
+import { cache, requestAnimDict, sleep, triggerServerCallback, waitFor } from '@communityox/ox_lib/client';
 import './context';
 import config from '@common/config';
 import { Grid, type GridEntry } from '@common/grid';

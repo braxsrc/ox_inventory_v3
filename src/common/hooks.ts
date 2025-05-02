@@ -1,4 +1,4 @@
-import { cache } from '@overextended/ox_lib';
+import { cache } from '@communityox/ox_lib';
 import type { ItemProperties } from './item';
 
 type EventHooks = OpenInventoryHook | MoveItemHook | AddItemHook;

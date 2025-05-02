@@ -1,6 +1,6 @@
 import { DatabaseSync } from 'node:sqlite';
 import type { InventoryItem, ItemProperties } from '@common/item';
-import { cache } from '@overextended/ox_lib';
+import { cache } from '@communityox/ox_lib';
 import { Inventory } from './inventory/class';
 
 const sqlite = new DatabaseSync(`${GetResourcePath(cache.resource)}/db.sqlite`);

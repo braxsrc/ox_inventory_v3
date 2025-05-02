@@ -1,5 +1,5 @@
 import type { Clothing, ItemProperties, Weapon } from '@common/item/index';
-import { triggerServerCallback } from '@overextended/ox_lib/client';
+import { triggerServerCallback } from '@communityox/ox_lib/client';
 import { GetClothingLabel, UseClothing } from './clothing';
 import { RequestOpenInventory } from './inventory';
 import { DisarmWeapon, EquipWeapon, LoadAmmo, currentWeapon } from './weapon';

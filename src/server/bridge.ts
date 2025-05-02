@@ -1,4 +1,4 @@
-import { GetPlayer, GetVehicleFromNetId, GetVehicleFromVin } from '@overextended/ox_core/server';
+import { GetPlayer, GetVehicleFromNetId, GetVehicleFromVin } from '@communityox/ox_core/server';
 
 export let GetPlayerInventoryId = (id: number) => {
   const player = GetPlayer(id);
