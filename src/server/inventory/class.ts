@@ -186,7 +186,7 @@ export class Inventory extends BaseInventory {
   public removeItem(data: ItemProperties) {
     const items = this.mapItems();
     const matchedItems = [];
-    data.quantity = data.quantity || 0;
+    data.quantity = Math.max(0, data.quantity || 0);
     let quantity = data.quantity;
 
     for (const item of items) {
