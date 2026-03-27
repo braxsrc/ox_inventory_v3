@@ -27,9 +27,21 @@ onClientCallback('ox_inventory:requestOpenInventory', async (playerId, inventori
   if (inventories.length > 5) inventories.length = 5;
 
   for (const inventoryId of inventories) {
+    if (typeof inventoryId !== 'string') continue;
+
+    const inventoryType = inventoryId.slice(0, inventoryId.indexOf(':'));
+
+    if (inventoryType === 'player') continue;
+
+    if (inventoryType === 'container') {
+      const itemId = +inventoryId.slice(inventoryId.indexOf(':') + 1);
+      const containerItem = GetInventoryItem(itemId);
+
+      if (!containerItem || containerItem.inventoryId !== inventory.inventoryId) continue;
+    }
+
     const secondary = await GetInventory(inventoryId);
 
-    // todo: validation
     if (secondary) {
       using secondaryHook = await TriggerEventHooks('openInventory', {
         playerId,
@@ -53,6 +65,10 @@ onNet('ox_inventory:closeInventory', async (inventoryId?: string) => {
 });
 
 onClientCallback('ox_inventory:requestMoveItem', async (playerId, data: MoveItem) => {
+  if (!Number.isInteger(data.fromSlot) || data.fromSlot < 0) return console.error('Invalid fromSlot');
+  if (data.toSlot !== undefined && (!Number.isInteger(data.toSlot) || data.toSlot < 0))
+    return console.error('Invalid toSlot');
+
   const fromInventory = await GetInventory(data.fromId);
   const toInventory =
     data.fromId === data.toId
@@ -73,9 +89,8 @@ onClientCallback('ox_inventory:requestMoveItem', async (playerId, data: MoveItem
   // no nested containers... for now
   if (toInventory.type === 'container' && item.category === 'container') return;
 
-  data.quantity = Math.max(1, Math.min(item.quantity, data.quantity));
-
-  if (data.quantity > item.quantity) return console.error('Invalid item or item count');
+  if (!Number.isInteger(data.quantity) || data.quantity < 1) data.quantity = item.quantity;
+  data.quantity = Math.min(item.quantity, data.quantity);
 
   const canHoldItem = toInventory.canHoldItem(item, data.toSlot, data.quantity);
 
@@ -96,6 +111,10 @@ onClientCallback('ox_inventory:requestMoveItem', async (playerId, data: MoveItem
   });
 
   if (!hook.success) return console.error('Cannot move item');
+
+  // Re-validate open state after async hook (TOCTOU guard)
+  if (fromInventory.getOpenState(playerId) !== 'open' || toInventory.getOpenState(playerId) !== 'open')
+    return console.error('Inventory closed during operation');
 
   const success = splitStack
     ? item.split(toInventory, data.quantity, data.toSlot, data.rotate)
